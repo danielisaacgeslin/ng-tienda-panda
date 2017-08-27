@@ -9,7 +9,7 @@ import { RoutingModule } from './routing/routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
-import { StoreService, HttpHelperService } from './services';
+import { StoreService, HttpHelperService, MLService } from './services';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 
@@ -27,7 +27,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
     NgbModule.forRoot(),
     RoutingModule
   ],
-  providers: [StoreService, HttpHelperService],
+  providers: [StoreService, HttpHelperService, MLService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

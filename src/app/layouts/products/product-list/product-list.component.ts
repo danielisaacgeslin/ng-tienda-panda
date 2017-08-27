@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { StoreService, HttpHelperService } from '../../../services';
+import { MLService } from '../../../services';
 
 @Component({
   selector: 'app-product-list',
@@ -11,15 +11,12 @@ import { StoreService, HttpHelperService } from '../../../services';
 })
 export class ProductListComponent implements OnInit {
 
-  private productsKey: string = 'products';
-  public products: Observable<any> = this.storeService.get(this.productsKey);
+  public products: Observable<any> = this.MLService.getProducts();
 
-  constructor(private storeService: StoreService, private httpHelperService: HttpHelperService) { }
+  constructor(private MLService: MLService) { }
 
   public ngOnInit() {
-    this.httpHelperService.getMLIds()
-      .switchMap(data => this.httpHelperService.getItems(data.products))
-      .subscribe(data => this.storeService.set(this.productsKey, data));
+
   }
 
 }
