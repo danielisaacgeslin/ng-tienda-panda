@@ -10,7 +10,8 @@ export class StoreService {
   constructor() { }
 
   public get(key: string): Observable<any> {
-    return this.store[key] || Observable.empty();
+    if (!this.store[key]) this.store[key] = new Subject();
+    return this.store[key];
   }
 
   public set(key: string, value: any): Observable<any> {
