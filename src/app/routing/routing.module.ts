@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: '../layouts/products/products.module#ProductsModule'
   },
   {
+    path: 'promotions',
+    loadChildren: '../layouts/promotions/promotions.module#PromotionsModule'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

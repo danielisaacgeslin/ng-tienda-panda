@@ -1,5 +1,7 @@
 export const constants = {
     storeKeys: {
-        products: 'products'
+        mlIds: 'mlIds',
+        products: 'products',
+        promotions: 'promotions'
     }
 };
