@@ -1,6 +1,7 @@
-<p>
-  promotion-list works!
-</p>
-<ul>
-  <li *ngFor="let promotion of (promotions | async)">{{ promotion.title }}</li>
-</ul>
+<div class="container">
+  <ul class="row">
+    <li class="col-3" *ngFor="let promotion of (promotions | async)">
+      <tp-article [props]="promotion"></tp-article>
+    </li>
+  </ul>
+</div>

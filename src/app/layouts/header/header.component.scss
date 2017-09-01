@@ -1,0 +1,19 @@
+@import '../../../variables';
+
+.main-logo {
+    max-width: 555px;
+}
+
+.navbar {
+    background-color: $tp-primary;
+
+    &__item {
+        font-size: $tp-font-size-regular;
+        color: $tp-light-gray;
+        text-transform: uppercase;
+
+        &_active {
+            font-weight: bold;
+        }
+    }
+}

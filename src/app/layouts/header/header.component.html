@@ -1,5 +1,21 @@
-<p>
-  header works!
-</p>
-<a routerLink="/products">Products</a>
-<a routerLink="/promotions">Promotions</a>
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img class="mx-auto d-block main-logo" src="/assets/tpanda.png" alt="tienda panda" />
+      </div>
+    </div>
+  </div>
+  <nav class="navbar">
+    <div class="container">
+      <ul class="row">
+        <li class="navbar__item col" routerLinkActive="navbar__item_active">
+          <a routerLink="/products">Products</a>
+        </li>
+        <li class="navbar__item col" routerLinkActive="navbar__item_active">
+          <a routerLink="/promotions">Promotions</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

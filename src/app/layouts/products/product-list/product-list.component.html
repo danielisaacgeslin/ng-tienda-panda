@@ -1,6 +1,7 @@
-<p>
-  product-list works!
-</p>
-<ul>
-  <li *ngFor="let product of (products | async)">{{ product.title }}</li>
-</ul>
+<div class="container">
+  <ul class="row">
+    <li class="col-3" *ngFor="let product of (products | async)">
+      <tp-article [props]="product"></tp-article>
+    </li>
+  </ul>
+</div>
