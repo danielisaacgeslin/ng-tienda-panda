@@ -9,11 +9,11 @@
   <nav class="navbar">
     <div class="container">
       <ul class="row">
-        <li class="navbar__item col" routerLinkActive="navbar__item_active">
-          <a routerLink="/products">Products</a>
-        </li>
-        <li class="navbar__item col" routerLinkActive="navbar__item_active">
-          <a routerLink="/promotions">Promotions</a>
+        <li *ngFor="let route of routes"
+            class="navbar__item col"
+            [routerLink]="route.link"
+            routerLinkActive="navbar__item_active">
+          {{ route.name }}
         </li>
       </ul>
     </div>

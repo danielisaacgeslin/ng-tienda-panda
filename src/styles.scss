@@ -5,6 +5,7 @@
 *, h1, h2, h3, h4, h5, h6, ul, ol, li {
     margin: 0;
     padding: 0;
+    outline: none;
 }
 
 a, a:hover {
@@ -25,4 +26,12 @@ ul, ol {
     &:hover {
         background-color: $tp-primary-dark;
     }
+}
+
+.min-layout-height {
+    min-height: 400px;
+}
+
+.small-caps {
+    font-variant: small-caps;
 }

@@ -1,7 +1,19 @@
-<div class="container">
+<div class="container min-layout-height">
+
+  <tp-title>
+    <span class="small-caps">Productos/Colchon y Sommier Pocket</span>
+  </tp-title>
+
+  <div *ngIf="!((products | async) || []).length" class="row align-items-center min-layout-height">
+    <tp-loading></tp-loading>
+  </div>
+
   <ul class="row">
     <li class="col-3" *ngFor="let product of (products | async)">
       <tp-article [props]="product"></tp-article>
     </li>
   </ul>
+
+  <tp-title>El envio de COLCHONES Y SOMMIERS ES SIN CARGO en Capital Federal y Gran Buenos Aires.</tp-title>
+
 </div>

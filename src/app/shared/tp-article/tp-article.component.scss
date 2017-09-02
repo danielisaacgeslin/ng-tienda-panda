@@ -2,6 +2,8 @@
 
 .article {
     cursor: pointer;
+    min-height: 370px;
+    margin: $tp-gap-small 0;
 
     &__image {
         max-width: 100%;

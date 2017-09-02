@@ -5,14 +5,19 @@
 }
 
 .navbar {
+    padding: 0;
     background-color: $tp-primary;
 
     &__item {
+        cursor: pointer;
+        padding: $tp-gap-small;
         font-size: $tp-font-size-regular;
         color: $tp-light-gray;
         text-transform: uppercase;
 
         &_active {
+            cursor: initial;
+            background-color: $tp-primary-dark;
             font-weight: bold;
         }
     }
