@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   api: {
     mlIds: '/assets/ml-ids.json',
-    mlItems: 'https://api.mercadolibre.com/items/'
+    mlItems: 'https://api.mercadolibre.com/items'
   }
 };

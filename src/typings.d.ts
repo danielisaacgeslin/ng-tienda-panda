@@ -5,3 +5,4 @@ interface NodeModule {
 }
 
 type IArticle = any;
+type ISlide = { src: string; title: string; };

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { MLService } from '../../../services';
 
@@ -11,12 +11,19 @@ import { MLService } from '../../../services';
 })
 export class PromotionListComponent implements OnInit {
 
-  public promotions: Observable<any> = this.MLService.getPromotions();
+  public promotions: IArticle[] = [];
+  private subs: Subscription;
 
   constructor(private MLService: MLService) { }
 
   public ngOnInit() {
+    this.subs = this.MLService.getPromotions()
+      .do(data => this.promotions = data)
+      .subscribe();
+  }
 
+  public ngOnDestroy() {
+    if (this.subs) this.subs.unsubscribe();
   }
 
 }

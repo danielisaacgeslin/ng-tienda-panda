@@ -9,22 +9,16 @@ import { constants } from '../constants';
 @Injectable()
 export class MLService {
 
-  constructor(private storeService: StoreService, private httpHelperService: HttpHelperService) { }
+  constructor(private httpHelperService: HttpHelperService) { }
 
-  public getProducts() {
-    this.httpHelperService.getMLIds()
-      .switchMap(data => this.httpHelperService.getItems(data.products))
-      .subscribe(data => this.storeService.set(constants.storeKeys.products, data));
-
-    return this.storeService.get(constants.storeKeys.products);
+  public getProducts(): Observable<IArticle[]> {
+    return this.httpHelperService.getMLIds()
+      .switchMap(data => this.httpHelperService.getItems(data.products));
   }
 
-  public getPromotions() {
-    this.httpHelperService.getMLIds()
-      .switchMap(data => this.httpHelperService.getItems(data.promotions))
-      .subscribe(data => this.storeService.set(constants.storeKeys.promotions, data));
-
-    return this.storeService.get(constants.storeKeys.promotions);
+  public getPromotions(): Observable<IArticle[]> {
+    return this.httpHelperService.getMLIds()
+      .switchMap(data => this.httpHelperService.getItems(data.promotions));
   }
 
 }
