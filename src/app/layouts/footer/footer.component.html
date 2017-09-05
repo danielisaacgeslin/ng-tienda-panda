@@ -1,3 +1,32 @@
-<p>
-  footer works!
-</p>
+<footer>
+  <section class="upper">
+    <div class="container">
+      <div class="row info">
+        <a *ngFor="let item of info"
+           class="col info__col"
+           [routerLink]="!item.blank && item.link"
+           [href]="item.blank && item.link"
+           [target]="item.blank ? '_blank' : '_self'">
+            <img [src]="item.img" [alt]="item.name" />
+            <span>{{ item.name }}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="middle"></section>
+
+  <section class="lower">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="d-flex justify-content-md-center news">
+            <input class="form-control news__input" disabled type="text" />
+            <button class="btn tp-btn" disabled>Suscribirme al Newsletter</button>
+          </div>
+          <div class="col-12 d-flex justify-content-md-center">
+            <tp-social-networks></tp-social-networks>
+          </div>
+        </div>
+      </div>
+  </section>
+</footer>

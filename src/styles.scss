@@ -30,6 +30,11 @@ tp-loading {
     &:hover {
         background-color: $tp-primary-dark;
     }
+    
+    &[disabled] {
+        cursor: not-allowed;
+        background-color: $tp-primary;
+    }
 }
 
 .min-layout-height {

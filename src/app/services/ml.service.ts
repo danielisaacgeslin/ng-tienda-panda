@@ -21,4 +21,9 @@ export class MLService {
       .switchMap(data => this.httpHelperService.getItems(data.promotions));
   }
 
+  public getSecondHand(): Observable<IArticle[]> {
+    return this.httpHelperService.getMLIds()
+      .switchMap(data => this.httpHelperService.getItems(data.secondHand));
+  }
+
 }

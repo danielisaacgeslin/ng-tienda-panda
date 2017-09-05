@@ -9,7 +9,8 @@ export class HeaderComponent implements OnInit {
 
   public readonly routes: { link: string; name: string }[] = [
     { link: '/products', name: 'Products' },
-    { link: '/promotions', name: 'Promotions' }
+    { link: '/promotions', name: 'Promotions' },
+    { link: '/secondHand', name: 'Segunda Mano' }
   ];
 
   constructor() { }

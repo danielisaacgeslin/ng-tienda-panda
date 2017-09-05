@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RoutingModule } from './routing/routing.module';
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './layouts/not-found/not-found.component';
@@ -25,7 +26,8 @@ import { FooterComponent } from './layouts/footer/footer.component';
     BrowserModule,
     HttpModule,
     NgbModule.forRoot(),
-    RoutingModule
+    RoutingModule,
+    SharedModule
   ],
   providers: [StoreService, HttpHelperService, MLService],
   bootstrap: [AppComponent]

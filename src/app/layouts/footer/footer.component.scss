@@ -1,0 +1,42 @@
+@import '../../../variables';
+
+.upper {
+    background-color: $tp-primary-light;
+    padding: $tp-gap-small 0;
+}
+
+.middle {
+    background-color: $tp-primary;
+    height: 20px;
+}
+
+.lower {
+    background-color: $tp-primary-dark;
+    padding: $tp-gap-small 0;
+}
+
+.news {
+    flex-flow: inherit;
+    margin-bottom: $tp-gap-regular;
+    
+    &__input {
+        display: block;
+        max-width: 550px;
+        margin-bottom: $tp-gap-small;
+    }
+
+    &__submit {
+        width: 100%;
+        max-width: 300px;
+        margin: $tp-gap-small 0;
+        display: block;
+    }
+}
+
+.info {
+    &__col {
+        text-align: center;
+        color: $tp-light-gray;
+        font-variant: small-caps;
+    }
+}

@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: '../layouts/promotions/promotions.module#PromotionsModule'
   },
   {
+    path: 'secondHand',
+    loadChildren: '../layouts/second-hand/second-hand.module#SecondHandModule'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

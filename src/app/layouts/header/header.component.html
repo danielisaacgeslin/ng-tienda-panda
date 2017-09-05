@@ -1,7 +1,12 @@
 <header>
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col-12">
+        <div class="networks">
+          <tp-social-networks></tp-social-networks>
+        </div>
+      </div>
+      <div class="col-12">
         <img id="tst-main-logo" class="mx-auto d-block main-logo" src="/assets/tpanda.png" alt="tienda panda" />
       </div>
     </div>
@@ -10,7 +15,7 @@
     <div class="container">
       <ul class="row">
         <li *ngFor="let route of routes"
-            class="navbar__item col"
+            class="navbar__item col-auto"
             [routerLink]="route.link"
             routerLinkActive="navbar__item_active">
           {{ route.name }}

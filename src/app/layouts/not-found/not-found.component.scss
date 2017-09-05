@@ -1,0 +1,14 @@
+@import '../../../variables';
+
+.not-found {
+    &__container {
+        width: 100%;
+    }
+}
+
+.go-back {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: $tp-gap-small 0;
+}
