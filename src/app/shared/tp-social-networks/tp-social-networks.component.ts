@@ -9,8 +9,8 @@ export class TpSocialNetworksComponent implements OnInit {
 
   public readonly networks = [
     { link: 'https://www.facebook.com/TiendaPandaArg', img: './assets/face.png', name: 'facebook' },
-    { link: '#', img: './assets/insta.png', name: 'instagram' },
-    { link: '#', img: './assets/ghost.png', name: 'network' }
+    { link: 'https://www.instagram.com/tpandaos/?hl=es', img: './assets/insta.png', name: 'instagram' },
+    { link: 'http://snapchat.com/add/Tpandaarg', img: './assets/ghost.png', name: 'snapchat' }
   ];
 
   constructor() { }

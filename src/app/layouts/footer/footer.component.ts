@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
   public readonly info = [
     { name: 'Preguntas frecuentes', img: './assets/preg.png', link: '/', blank: false },
     { name: 'Como comprar', img: './assets/comp.png', link: '/', blank: false },
-    { name: 'Promociones bancarias', img: './assets/mp.png', link: '/', blank: true }
+    { name: 'Promociones bancarias', img: './assets/mp.png', link: 'https://www.mercadopago.com.ar/promociones', blank: true }
   ];
 
   constructor() { }

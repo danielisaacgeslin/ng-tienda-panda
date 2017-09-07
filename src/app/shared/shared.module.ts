@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { TpArticleComponent } from './tp-article/tp-article.component';
 import { TpLoadingComponent } from './tp-loading/tp-loading.component';
 import { TpTitleComponent } from './tp-title/tp-title.component';
@@ -7,7 +8,8 @@ import { TpSocialNetworksComponent } from './tp-social-networks/tp-social-networ
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   declarations: [
     TpArticleComponent,

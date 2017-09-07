@@ -9,7 +9,8 @@ export class NotFoundComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
+    
   }
 
 }

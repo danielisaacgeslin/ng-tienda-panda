@@ -1,0 +1,21 @@
+<div class="container">
+  <div *ngIf="article" class="row article">
+    
+    <div class="col-6">
+      <ngb-carousel>
+        <ng-template *ngFor="let slide of article.pictures" ngbSlide>
+          <img class="mx-auto d-block slide" [src]="slide.url" [alt]="article.title">
+        </ng-template>
+      </ngb-carousel>
+    </div>
+
+    <div class="col-6">
+      <h1>{{ article.title }}</h1>
+      <h4>{{ article.price | currency: 'USD': true: '1.0' }}</h4>
+      <a class="col-6 rounded btn tp-btn" [href]="article.permalink" target="_blank">
+        ver en Mercado Libre
+      </a>
+    </div>
+
+  </div>
+</div>

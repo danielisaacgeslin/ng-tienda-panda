@@ -4,7 +4,7 @@
       <div class="row info">
         <a *ngFor="let item of info"
            class="col info__col"
-           [routerLink]="!item.blank && item.link"
+           [attr.routerLink]="!item.blank && item.link"
            [href]="item.blank && item.link"
            [target]="item.blank ? '_blank' : '_self'">
             <img [src]="item.img" [alt]="item.name" />

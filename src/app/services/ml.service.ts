@@ -11,6 +11,11 @@ export class MLService {
 
   constructor(private httpHelperService: HttpHelperService) { }
 
+  public getItem(id: string): Observable<IArticle> {
+    return this.httpHelperService.getItems([id])
+      .map(items => items && items[0] || {});
+  }
+
   public getProducts(): Observable<IArticle[]> {
     return this.httpHelperService.getMLIds()
       .switchMap(data => this.httpHelperService.getItems(data.products));

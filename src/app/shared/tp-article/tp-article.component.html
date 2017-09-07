@@ -1,5 +1,5 @@
 <article class="article">
-  <a target="_blank" [href]="props.permalink">
+  <a [routerLink]="['/products/detail', props.id]">
     <img class="mx-auto d-block article__image" 
         [src]="props.pictures[0]?.url || props.thumbnail"
         [alt]="props.title" />
