@@ -2,7 +2,7 @@
 @import "~font-awesome/css/font-awesome.min.css";
 @import './variables';
 
-*, h1, h2, h3, h4, h5, h6, ul, ol, li {
+*, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
     margin: 0;
     padding: 0;
     outline: none;
@@ -28,6 +28,7 @@ tp-loading {
     cursor: pointer;
 
     &:hover {
+        color: $tp-light-gray;
         background-color: $tp-primary-dark;
     }
     
@@ -35,7 +36,15 @@ tp-loading {
         cursor: not-allowed;
         background-color: $tp-primary;
     }
+
+    &_big {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+    }
 }
+
+
 
 .min-layout-height {
     min-height: 400px;

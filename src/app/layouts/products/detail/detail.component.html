@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="article" class="row article">
+  <div *ngIf="article" class="row align-items-center article">
     
     <div class="col-6">
       <ngb-carousel>
@@ -10,9 +10,10 @@
     </div>
 
     <div class="col-6">
-      <h1>{{ article.title }}</h1>
-      <h4>{{ article.price | currency: 'USD': true: '1.0' }}</h4>
-      <a class="col-6 rounded btn tp-btn" [href]="article.permalink" target="_blank">
+      <p class="article__condition">{{ article.condition === 'new' ? 'Nuevo' : '' }}</p>
+      <h1 class="article__main-title">{{ article.title }}</h1>
+      <h4 class="article__price">{{ article.price | currency: 'USD': true: '1.0' }}</h4>
+      <a class="col-6 rounded btn tp-btn tp-btn_big" [href]="article.permalink" target="_blank">
         ver en Mercado Libre
       </a>
     </div>

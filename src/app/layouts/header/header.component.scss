@@ -22,7 +22,6 @@
         text-transform: uppercase;
 
         &_active {
-            cursor: initial;
             background-color: $tp-primary-dark;
             font-weight: bold;
         }

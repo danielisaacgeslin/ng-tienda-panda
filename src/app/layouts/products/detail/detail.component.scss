@@ -1,5 +1,23 @@
-.article {
+@import '../../../../variables';
 
+.article {
+    margin: $tp-gap-regular 0;
+
+    &__main-title {
+        color: $tp-primary;
+        font-variant: small-caps;
+        font-size: $tp-font-size-xxxbig;
+    }
+
+    &__price {
+        font-size: $tp-font-size-superbig;
+        margin: $tp-gap-big 0;
+    }
+
+    &__condition {
+        color: $tp-black;
+        font-size: $tp-font-size-regular;
+    }
 }
 
 .slide {
