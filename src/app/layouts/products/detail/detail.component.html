@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container min-layout-height">
   <div *ngIf="article" class="row align-items-center article">
     
     <div class="col-6">
@@ -16,6 +16,15 @@
       <a class="col-6 rounded btn tp-btn tp-btn_big" [href]="article.permalink" target="_blank">
         ver en Mercado Libre
       </a>
+    </div>
+
+    <div *ngIf="article.attributes && article.attributes.length" class="col-12">
+      <tp-title>
+        <span class="small-caps">Caracteristicas</span>
+      </tp-title>
+      <p *ngFor="let attr of article.attributes" class="article__atribute text-center">
+        <strong>{{ attr.name }}:</strong> {{ attr.value_name }}
+      </p>
     </div>
 
   </div>
