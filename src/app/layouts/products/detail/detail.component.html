@@ -1,4 +1,9 @@
 <div class="container min-layout-height">
+  
+  <div *ngIf="!article || !article.title" class="row align-items-center min-layout-height">
+    <tp-loading></tp-loading>
+  </div>
+  
   <div *ngIf="article" class="row align-items-center article">
     
     <div class="col-6">
