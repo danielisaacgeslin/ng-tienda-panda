@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, Subscription } from 'rxjs';
-
-import { constants } from '../../../constants';
 import { MLService, HttpHelperService } from '../../../services';
 
 @Component({

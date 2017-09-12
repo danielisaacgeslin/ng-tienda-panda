@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, Subscription } from 'rxjs';
-
 import { MLService } from '../../../services';
 
 @Component({
@@ -12,18 +10,10 @@ import { MLService } from '../../../services';
 export class SecondHandListComponent implements OnInit {
 
   public secondHand: IArticle[] = [];
-  private subs: Subscription;
 
   constructor(private MLService: MLService) { }
 
   public ngOnInit() {
-    this.subs = this.MLService.getSecondHand()
-      .do(data => this.secondHand = data)
-      .subscribe();
+    this.MLService.getSecondHand().do(data => this.secondHand = data).subscribe();
   }
-
-  public ngOnDestroy() {
-    if (this.subs) this.subs.unsubscribe();
-  }
-
 }
