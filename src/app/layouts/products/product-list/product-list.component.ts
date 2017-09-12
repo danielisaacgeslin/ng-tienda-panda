@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { constants } from '../../../constants';
-import { MLService } from '../../../services';
+import { MLService, HttpHelperService } from '../../../services';
 
 @Component({
   selector: 'app-product-list',
@@ -12,20 +12,14 @@ import { MLService } from '../../../services';
 })
 export class ProductListComponent implements OnInit {
 
-  public readonly slides: ISlide[] = constants.productsSlides;
+  public slides: ISlide[] = [];
   public products: IArticle[] = [];
-  private subs: Subscription;
 
-  constructor(private MLService: MLService) { }
+  constructor(private MLService: MLService, private httpHelperService: HttpHelperService) { }
 
   public ngOnInit() {
-    this.subs = this.MLService.getProducts()
-      .do(data => this.products = data)
-      .subscribe();
+    this.MLService.getProducts().do(data => this.products = data).subscribe();
+    /** @todo this is a quick fix, this should be fixed to avoid excesive calls in the future */
+    this.httpHelperService.getRunTimeConstants().do(data => this.slides = data.productsSlides).subscribe();
   }
-
-  public ngOnDestroy() {
-    if (this.subs) this.subs.unsubscribe();
-  }
-
 }

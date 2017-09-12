@@ -59,4 +59,11 @@ export class HttpHelperService {
     return this.wrapperMethod(config).map(res => res.json());
   }
 
+  public getRunTimeConstants(): Observable<any> {
+    const method: string = 'get';
+    const url: string = env.api.runTimeConstants;
+    const options: RequestOptionsArgs = {};
+    return this.wrapperMethod({ method, url, options }).map(res => res.json());
+  }
+
 }
