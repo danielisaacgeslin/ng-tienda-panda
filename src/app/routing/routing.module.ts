@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: '../layouts/second-hand/second-hand.module#SecondHandModule'
   },
   {
+    path: 'adminTools',
+    loadChildren: '../layouts/admin-tools/admin-tools.module#AdminToolsModule'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

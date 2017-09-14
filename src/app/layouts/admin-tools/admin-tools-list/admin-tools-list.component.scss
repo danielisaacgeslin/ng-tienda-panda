@@ -1,0 +1,15 @@
+@import '../../../../variables';
+
+.admin-tools-container {
+    margin-bottom: $tp-gap-regular;
+}
+
+.category-name {
+    text-transform: capitalize;
+    margin: $tp-gap-small 0;
+    cursor: pointer;
+}
+
+.input {
+    margin-bottom: $tp-gap-xsmall;
+}

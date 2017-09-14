@@ -11,6 +11,10 @@ export class MLService {
 
   constructor(private httpHelperService: HttpHelperService) { }
 
+  public getMLIds(): Observable<any> {
+    return this.httpHelperService.getMLIds();
+  }
+
   public getItem(id: string): Observable<IArticle> {
     return this.httpHelperService.getItems([id])
       .map(items => items && items[0] || {});
