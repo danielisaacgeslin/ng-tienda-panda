@@ -1,3 +1,10 @@
 <div class="box">
-  <pre><ng-content></ng-content></pre>
+  <button class="btn tp-btn float-right" (click)="copy()">
+    <i class="fa fa-clipboard" aria-hidden="true"></i>
+  </button>
+  <pre #content><ng-content></ng-content></pre>
+  <button class="btn tp-btn float-right" (click)="copy()">
+    <i class="fa fa-clipboard" aria-hidden="true"></i>
+  </button>
+  <div class="clearfix"></div>
 </div>

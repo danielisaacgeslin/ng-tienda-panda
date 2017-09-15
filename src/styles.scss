@@ -55,6 +55,8 @@ tp-loading {
 }
 
 .input {
+    border: 2px solid $tp-gray;
+
     &_success, &_success:focus {
         border: 2px solid $tp-primary-light;
     }
