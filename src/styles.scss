@@ -53,3 +53,13 @@ tp-loading {
 .small-caps {
     font-variant: small-caps;
 }
+
+.input {
+    &_success, &_success:focus {
+        border: 2px solid $tp-primary-light;
+    }
+
+    &_error, &_error:focus {
+        border: 2px solid $tp-error;
+    }
+}

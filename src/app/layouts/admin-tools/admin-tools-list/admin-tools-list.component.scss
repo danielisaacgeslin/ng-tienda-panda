@@ -1,5 +1,11 @@
 @import '../../../../variables';
 
+%btn {
+    color: $tp-light-gray;
+    height: 40px;
+    cursor: pointer;
+}
+
 .admin-tools-container {
     margin-bottom: $tp-gap-regular;
 }
@@ -12,4 +18,15 @@
 
 .input {
     margin-bottom: $tp-gap-xsmall;
+    border: 2px solid $tp-gray;
+}
+
+.plus {
+    @extend %btn;
+    background-color: $tp-primary;
+}
+
+.minus {
+    @extend %btn;
+    background-color: $tp-error;
 }

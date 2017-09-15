@@ -9,6 +9,7 @@
 
     <div class="col-lg-6 col-md-6 col-sm-12">
       <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <button [disabled]="formGroup.invalid" type="submit" class="btn tp-btn tp-btn_big">generar</button>
         <div *ngFor="let key of formKeys">
           <p class="category-name" (click)="toggleHiddenCategory(key)">
             <i class="fa"
@@ -17,14 +18,25 @@
             {{ key }}
           </p>
           <div [hidden]="hiddenCategory[key]">
-            <input *ngFor="let inputKey of getFieldNames(key)"
-                  [formControlName]="inputKey"
-                  class="form-control input"
-                  placeholder="ID o URL"
-                  type="text" />
+            <div class="input-group" *ngFor="let inputKey of getFieldNames(key)">
+              <input [formControlName]="inputKey"
+                    class="form-control input"
+                    [ngClass]="{
+                      'input_success': formGroup.controls[inputKey].valid,
+                      'input_error': !formGroup.controls[inputKey].valid && formGroup.controls[inputKey].dirty
+                    }"
+                    placeholder="ID o URL"
+                    type="text" />
+                    <button *ngIf="isLastOfType(inputKey)" class="btn input-group-addon plus" (click)="addInputOfType(inputKey)">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                    <button *ngIf="!isLastRemainingOfGroup(inputKey)" class="btn input-group-addon btn-danger minus" (click)="removeInput(inputKey)">
+                      <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button>
+            </div>
           </div>
         </div>
-        <button type="submit" class="btn tp-btn tp-btn_big">generar</button>
+        <button [disabled]="formGroup.invalid" type="submit" class="btn tp-btn tp-btn_big">generar</button>
       </form>
     </div>
 
