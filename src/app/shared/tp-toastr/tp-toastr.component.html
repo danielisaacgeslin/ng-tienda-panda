@@ -1,0 +1,9 @@
+<div *ngIf="toast.id !== undefined" class="toast alert" [ngClass]="'alert-' + toast.status">
+  <header class="toast__title col-12">
+    <strong>{{ toast.title || toast.status }}</strong>
+    <span class="toast__remove" (click)="removeToast(toast.id)">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </span>
+  </header>
+  <p class="toast__message col-12">{{ toast.message }}</p>
+</div>

@@ -7,19 +7,19 @@ import { NotFoundComponent } from '../layouts/not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'products',
+    redirectTo: 'productos',
     pathMatch: 'full'
   },
   {
-    path: 'products',
+    path: 'productos',
     loadChildren: '../layouts/products/products.module#ProductsModule'
   },
   {
-    path: 'promotions',
+    path: 'promociones',
     loadChildren: '../layouts/promotions/promotions.module#PromotionsModule'
   },
   {
-    path: 'secondHand',
+    path: 'segunda-mano',
     loadChildren: '../layouts/second-hand/second-hand.module#SecondHandModule'
   },
   {

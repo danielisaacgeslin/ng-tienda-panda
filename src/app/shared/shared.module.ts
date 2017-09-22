@@ -6,6 +6,7 @@ import { TpLoadingComponent } from './tp-loading/tp-loading.component';
 import { TpTitleComponent } from './tp-title/tp-title.component';
 import { TpJSONComponent } from './tp-json/tp-json.component';
 import { TpSocialNetworksComponent } from './tp-social-networks/tp-social-networks.component';
+import { TpToastrComponent } from './tp-toastr/tp-toastr.component';
 
 @NgModule({
   imports: [
@@ -17,14 +18,16 @@ import { TpSocialNetworksComponent } from './tp-social-networks/tp-social-networ
     TpLoadingComponent,
     TpTitleComponent,
     TpJSONComponent,
-    TpSocialNetworksComponent
+    TpSocialNetworksComponent,
+    TpToastrComponent
   ],
   exports: [
     TpArticleComponent,
     TpLoadingComponent,
     TpTitleComponent,
     TpJSONComponent,
-    TpSocialNetworksComponent
+    TpSocialNetworksComponent,
+    TpToastrComponent
   ]
 })
 export class SharedModule { }

@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', component: SecondHandListComponent },
-      { path: 'list', component: SecondHandListComponent }
+      { path: 'lista', component: SecondHandListComponent }
     ]
   }
 ];

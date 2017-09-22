@@ -1,48 +1,52 @@
 <div class="container min-layout-height admin-tools-container">
-  <div class="row">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="row">
 
-    <div class="col-12">
-      <tp-title>
-        <span class="small-caps">Generador de <strong>JSON</strong> para Mercado Libre</span>
-      </tp-title>
-    </div>
+      <div class="col-12">
+        <tp-title>
+          <span class="small-caps">Generador de <strong>JSON</strong> para Mercado Libre</span>
+        </tp-title>
+      </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-        <button [disabled]="formGroup.invalid" type="submit" class="btn tp-btn tp-btn_big">generar</button>
-        <div *ngFor="let key of formKeys">
-          <p class="category-name" (click)="toggleHiddenCategory(key)">
-            <i class="fa"
-            [ngClass]="{'fa-chevron-down': hiddenCategory[key], 'fa-chevron-up': !hiddenCategory[key]}"
-            aria-hidden="true"></i>
-            {{ key }}
-          </p>
-          <div [hidden]="hiddenCategory[key]">
-            <div class="input-group" *ngFor="let inputKey of getFieldNames(key)">
-              <input [formControlName]="inputKey"
-                    class="form-control input"
-                    [ngClass]="{
-                      'input_success': formGroup.controls[inputKey].valid,
-                      'input_error': !formGroup.controls[inputKey].valid && formGroup.controls[inputKey].dirty
-                    }"
-                    placeholder="ID o URL"
-                    type="text" />
-                    <button *ngIf="isLastOfType(inputKey)" class="btn input-group-addon plus" (click)="addInputOfType(inputKey)">
-                      <i class="fa fa-plus" aria-hidden="true"></i>
-                    </button>
-                    <button *ngIf="!isLastRemainingOfGroup(inputKey)" class="btn input-group-addon btn-danger minus" (click)="removeInput(inputKey)">
-                      <i class="fa fa-minus" aria-hidden="true"></i>
-                    </button>
-            </div>
+      <input formControlName="token"
+             class="form-control"
+             placeholder="Token"
+             type="password"
+             [ngClass]="{
+                'input_success': formGroup.controls.token.valid,
+                'input_error': !formGroup.controls.token.valid
+              }">
+
+      <div class="col" *ngFor="let key of formKeys">
+        <p class="category-name">{{ key }}</p>
+        <div class="category-input-container">
+          <div class="input-group" *ngFor="let inputKey of getFieldNames(key)">
+            <input [formControlName]="inputKey"
+                  class="form-control input"
+                  [ngClass]="{
+                    'input_success': formGroup.controls[inputKey].valid,
+                    'input_error': !formGroup.controls[inputKey].valid && formGroup.controls[inputKey].dirty
+                  }"
+                  placeholder="ID o URL"
+                  type="text" />
+                  <button *ngIf="isLastOfType(inputKey)" class="btn input-group-addon plus" (click)="addInputOfType(inputKey)">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                  <button *ngIf="!isLastRemainingOfGroup(inputKey)" class="btn input-group-addon btn-danger minus" (click)="removeInput(inputKey)">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                  </button>
           </div>
         </div>
-        <button [disabled]="formGroup.invalid" type="submit" class="btn tp-btn tp-btn_big">generar</button>
-      </form>
-    </div>
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <tp-json>{{ MLIds | json }}</tp-json>
-    </div>
-
-  </div>
+      </div>
+      
+      <button [disabled]="formGroup.invalid || savingMLIds" type="submit" class="btn tp-btn tp-btn_big">
+        salvar lista
+      </button>
+        
+      <!-- <div class="col-12">
+        <tp-json>{{ MLIds | json }}</tp-json>
+      </div> -->
+        
+      </div>
+  </form>
 </div>

@@ -7,8 +7,11 @@ import {
   ValidatorFn,
   ValidationErrors
 } from '@angular/forms';
+import { Http, Headers, RequestOptionsArgs } from '@angular/http';
+import { Observable } from 'rxjs';
 
-import { MLService, HttpHelperService } from '../../../services';
+import { environment as env } from '../../../../environments/environment';
+import { MLService, ToastrService } from '../../../services';
 
 @Component({
   selector: 'app-admin-tools-list',
@@ -19,13 +22,15 @@ export class AdminToolsListComponent implements OnInit {
 
   public MLIds: any = {};
   public formKeys: string[] = [];
-  public formGroup: FormGroup = new FormGroup({});
+  public formGroup: FormGroup = new FormGroup({ token: new FormControl('', [Validators.required]) });
   public hiddenCategory: { [key: string]: boolean } = {};
+  public savingMLIds: boolean = false;
 
   private readonly idLength: number = 12;
   private readonly idPrefix: string = 'MLA';
+  private token: string;
 
-  constructor(private MLService: MLService, private httpHelperService: HttpHelperService) { }
+  constructor(private MLService: MLService, private http: Http, private toastrService: ToastrService) { }
 
   public ngOnInit() {
     this.MLService.getMLIds()
@@ -45,13 +50,16 @@ export class AdminToolsListComponent implements OnInit {
 
     const MLIds: any = {};
     for (let controlKey in this.formGroup.controls) {
+      if (controlKey === 'token') continue;
       let key: string = controlKey.slice(0, controlKey.indexOf('-'));
       MLIds[key] = MLIds[key] || [];
       const value = this.generateId(this.formGroup.controls[controlKey].value);
       if (value) MLIds[key].push(value);
     }
     this.MLIds = MLIds;
+    this.token = this.formGroup.controls.token.value;
     this.resetForm();
+    this.saveMLIds();
   }
 
   public toggleHiddenCategory(key: string): void {
@@ -108,6 +116,7 @@ export class AdminToolsListComponent implements OnInit {
         controls[`${key}-${index}`] = this.generateFormControl(id);
       });
     }
+    controls.token = new FormControl(this.token, [Validators.required]);
     this.formGroup = new FormGroup(controls);
   }
 
@@ -117,6 +126,19 @@ export class AdminToolsListComponent implements OnInit {
 
   private generateFormControl(value: string): AbstractControl {
     return new FormControl(value, [Validators.required, this.validate()]);
+  }
+
+  private saveMLIds() {
+    this.savingMLIds = true;
+    const headers = new Headers({ token: this.token });
+    this.http.post(env.api.mlIds, this.MLIds, { headers })
+      .do(data => this.toastrService.toast({ title: 'Exito', message: 'lista salvada', status: 'success' }))
+      .catch(error => {
+        this.toastrService.toast({ title: 'Error', message: error.json(), status: 'danger' });
+        return Observable.empty();
+      })
+      .finally(() => this.savingMLIds = false)
+      .subscribe()
   }
 
 }

@@ -1,0 +1,23 @@
+@import '../../../variables';
+
+.toast {
+    position: fixed;
+    bottom: $tp-gap-small;
+    right: $tp-gap-small;
+    z-index: 10;
+    min-width: 230px;
+
+    &__title {
+        text-transform: capitalize;
+        margin-bottom: $tp-gap-xsmall;
+    }
+
+    &__remove {
+        float: right;
+        cursor: pointer;
+    }
+
+    &__message {
+        min-height: 40px;
+    }
+}

@@ -5,7 +5,7 @@
         <a *ngFor="let item of info"
            class="col info__col"
            [attr.routerLink]="!item.blank && item.link"
-           [href]="item.blank && item.link"
+           [attr.href]="item.blank ? item.link : voidHref"
            [target]="item.blank ? '_blank' : '_self'">
             <img [src]="item.img" [alt]="item.name" />
             <span>{{ item.name }}</span>

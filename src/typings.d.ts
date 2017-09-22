@@ -6,3 +6,10 @@ interface NodeModule {
 
 type IArticle = any;
 type ISlide = { src: string; title: string; };
+
+interface IToast {
+  id?: number;
+  status?: 'danger' | 'warning' | 'success';
+  title?: string;
+  message?: string;
+}

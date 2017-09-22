@@ -50,13 +50,24 @@ export class HttpHelperService {
 
   public getMLIds(): Observable<any> {
     const config = { method: 'get', url: env.api.mlIds, options: {} };
-    return this.wrapperMethod(config).map(res => res.json());
+    return this.wrapperMethod(config).map(res => {
+      const json = res.json();
+      let finalJson: any = {};
+      for (let key in json) {
+        if (key.charAt(0) === '_') continue;
+        finalJson[key] = json[key];
+      }
+      return finalJson;
+    });
   }
 
   public getItems(itemIds: string[]): Observable<any> {
     const options: RequestOptionsArgs = { params: { ids: itemIds.toString() } };
     const config = { method: 'get', url: env.api.mlItems, options };
-    return this.wrapperMethod(config).map(res => res.json());
+    return this.wrapperMethod(config)
+      .map(res => (<any>res.json()).sort((a, b) =>
+        new Date(a.start_time).getTime() > new Date(b.start_time).getTime() ? 1 : -1
+      ))
   }
 
   public getRunTimeConstants(): Observable<any> {

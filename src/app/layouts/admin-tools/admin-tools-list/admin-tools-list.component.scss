@@ -29,3 +29,9 @@
     @extend %btn;
     background-color: $tp-error;
 }
+
+.category-input-container {
+    max-height: 400px;
+    overflow: auto;
+    margin-bottom: $tp-gap-regular;
+}

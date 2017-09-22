@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', component: PromotionListComponent },
-      { path: 'list', component: PromotionListComponent }
+      { path: 'lista', component: PromotionListComponent }
     ]
   }
 ];
