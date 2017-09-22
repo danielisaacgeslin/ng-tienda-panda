@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MLService } from '../../../services';
+import { MLService, UtilsService } from '../../../services';
 
 @Component({
   selector: 'app-second-hand-list',
@@ -11,9 +11,16 @@ export class SecondHandListComponent implements OnInit {
 
   public secondHand: IArticle[] = [];
 
-  constructor(private MLService: MLService) { }
+  constructor(private MLService: MLService, private utilsService: UtilsService) { }
 
   public ngOnInit() {
-    this.MLService.getSecondHand().do(data => this.secondHand = data).subscribe();
+    this.MLService.getSecondHand()
+      .do(data => this.secondHand = data)
+      .do(() => this.orderBy(null))
+      .subscribe();
+  }
+
+  public orderBy(criteria: string): void {
+    this.secondHand = this.utilsService.order(criteria, this.secondHand);
   }
 }

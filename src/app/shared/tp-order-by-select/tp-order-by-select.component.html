@@ -1,0 +1,9 @@
+<form [formGroup]="formGroup">
+  <div class="form-group block">
+    <select class="form-control block__select" formControlName="criteria" (change)="onChange()">
+      <option *ngFor="let option of options" [value]="option.value">{{ option.name }}</option>
+    </select>
+    <label class="block__label">Ordenar por</label>
+  </div>
+  <div class="clearfix"></div>
+</form>

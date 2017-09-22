@@ -1,5 +1,8 @@
 <div class="container min-layout-height">
 
+  <br>
+  <tp-order-by-select (orderCriteria)="orderBy($event)"></tp-order-by-select>
+  
   <div *ngIf="!secondHand.length" class="row align-items-center min-layout-height">
     <tp-loading></tp-loading>
   </div>

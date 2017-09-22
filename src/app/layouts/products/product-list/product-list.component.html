@@ -9,6 +9,7 @@
   <tp-title>
     <span class="small-caps">Productos/Colchon y Sommier Pocket</span>
   </tp-title>
+  <tp-order-by-select (orderCriteria)="orderBy($event)"></tp-order-by-select>
 
   <div *ngIf="!products.length" class="row align-items-center min-layout-height">
     <tp-loading></tp-loading>

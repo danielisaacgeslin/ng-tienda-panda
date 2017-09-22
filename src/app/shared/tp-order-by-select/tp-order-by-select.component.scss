@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.block {
+    width: 100%;
+    margin: 0;
+
+    &__label {
+        float: right;
+        padding: 7px 0;
+    }
+
+    &__select {
+        float: right;
+        max-width: 220px;
+        margin-left: $tp-gap-xsmall;
+    }
+}
