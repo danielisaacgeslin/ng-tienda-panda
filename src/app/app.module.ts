@@ -10,7 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
-import * as services from './services';
+import { StoreService, HttpHelperService, MLService, ToastrService, UtilsService } from './services';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 
@@ -29,7 +29,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
     RoutingModule,
     SharedModule
   ],
-  providers: Object.keys(services).map(key => services[key]),
+  providers: [StoreService, HttpHelperService, MLService, ToastrService, UtilsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
