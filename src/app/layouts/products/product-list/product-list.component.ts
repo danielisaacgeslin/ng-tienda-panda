@@ -23,9 +23,9 @@ export class ProductListComponent implements OnInit {
       .do(data => this.products = data)
       .do(() => this.orderBy(null))
       .subscribe();
-    /** @todo this is a quick fix, this should be fixed to avoid excesive calls in the future */
-    this.httpHelperService.getRunTimeConstants()
-      .do(data => this.slides = data.productsSlides)
+
+    this.httpHelperService.getBanners()
+      .do(data => this.slides = data)
       .subscribe();
   }
 

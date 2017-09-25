@@ -77,4 +77,12 @@ export class HttpHelperService {
     return this.wrapperMethod({ method, url, options }).map(res => res.json());
   }
 
+  public getBanners(): Observable<any> {
+    const method: string = 'get';
+    const url: string = env.api.banners;
+    const options: RequestOptionsArgs = {};
+    return this.wrapperMethod({ method, url, options })
+      .map(res => (<any>res.json()).map(item => `${url}${item}`));
+  }
+
 }
