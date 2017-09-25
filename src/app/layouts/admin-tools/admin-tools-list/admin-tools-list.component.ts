@@ -11,7 +11,7 @@ import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { environment as env } from '../../../../environments/environment';
-import { MLService, ToastrService } from '../../../services';
+import { MLService, ToastrService, HttpHelperService } from '../../../services';
 
 @Component({
   selector: 'app-admin-tools-list',
@@ -25,18 +25,25 @@ export class AdminToolsListComponent implements OnInit {
   public formGroup: FormGroup = new FormGroup({ token: new FormControl('', [Validators.required]) });
   public hiddenCategory: { [key: string]: boolean } = {};
   public savingMLIds: boolean = false;
+  public itemsData: { [key: string]: IArticle } = {};
 
   private readonly idLength: number = 12;
   private readonly idPrefix: string = 'MLA';
   private token: string;
 
-  constructor(private MLService: MLService, private http: Http, private toastrService: ToastrService) { }
+  constructor(
+    private MLService: MLService,
+    private http: Http,
+    private toastrService: ToastrService,
+    private httpHelperService: HttpHelperService
+  ) { }
 
   public ngOnInit() {
     this.MLService.getMLIds()
       .subscribe(ids => {
         this.MLIds = ids;
-        this.formKeys = Object.keys(ids)
+        this.formKeys = Object.keys(ids);
+        this.fillItemsData(this.getCondensedMLIds());
         this.resetForm();
       });
   }
@@ -58,6 +65,7 @@ export class AdminToolsListComponent implements OnInit {
     }
     this.MLIds = MLIds;
     this.token = this.formGroup.controls.token.value;
+    this.fillItemsData(this.getCondensedMLIds());
     this.resetForm();
     this.saveMLIds();
   }
@@ -90,6 +98,11 @@ export class AdminToolsListComponent implements OnInit {
     const keyToCheckData = this.getKeyData(keyToCheck);
     const keys: string[] = Object.keys(this.formGroup.controls);
     return keys.filter(key => key.split('-')[0] === keyToCheckData.type).length < 2;
+  }
+
+  public fetchItem(control: AbstractControl): void {
+    if (!control.valid) return;
+    this.fillItemsData([control.value]);
   }
 
   private getKeyData(key: string): { type: string; number: Number } {
@@ -139,6 +152,23 @@ export class AdminToolsListComponent implements OnInit {
       })
       .finally(() => this.savingMLIds = false)
       .subscribe()
+  }
+
+  private fillItemsData(ids: string[]): void {
+    this.httpHelperService.getItems(ids)
+      .do(data => {
+        const newItemsData: { [key: string]: IArticle } = {};
+        data.forEach(item => newItemsData[item.id] = item);
+        this.itemsData = Object.assign({}, this.itemsData, newItemsData);
+      })
+      .subscribe();
+  }
+
+  private getCondensedMLIds(): string[] {
+    return Object.keys(this.MLIds)
+      .map(key => this.MLIds[key])
+      .reduce((array, total) => total.concat(array), [])
+      .filter(id => !this.itemsData[id]);
   }
 
 }

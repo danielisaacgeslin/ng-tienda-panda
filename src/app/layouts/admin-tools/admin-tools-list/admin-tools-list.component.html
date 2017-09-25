@@ -20,21 +20,27 @@
       <div class="col" *ngFor="let key of formKeys">
         <p class="category-name">{{ key }}</p>
         <div class="category-input-container">
-          <div class="input-group" *ngFor="let inputKey of getFieldNames(key)">
-            <input [formControlName]="inputKey"
-                  class="form-control input"
-                  [ngClass]="{
-                    'input_success': formGroup.controls[inputKey].valid,
-                    'input_error': !formGroup.controls[inputKey].valid && formGroup.controls[inputKey].dirty
-                  }"
-                  placeholder="ID o URL"
-                  type="text" />
-                  <button *ngIf="isLastOfType(inputKey)" class="btn input-group-addon plus" (click)="addInputOfType(inputKey)">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                  </button>
-                  <button *ngIf="!isLastRemainingOfGroup(inputKey)" class="btn input-group-addon btn-danger minus" (click)="removeInput(inputKey)">
-                    <i class="fa fa-minus" aria-hidden="true"></i>
-                  </button>
+          <div *ngFor="let inputKey of getFieldNames(key)">
+            <div class="input-group">
+              <input [formControlName]="inputKey"
+                     (change)="fetchItem(formGroup.controls[inputKey])"
+                     class="form-control input"
+                     [ngClass]="{
+                       'input_success': formGroup.controls[inputKey].valid,
+                       'input_error': !formGroup.controls[inputKey].valid && formGroup.controls[inputKey].dirty
+                     }"
+                     placeholder="ID o URL"
+                     type="text" />
+              <button *ngIf="isLastOfType(inputKey)" class="btn input-group-addon plus" (click)="addInputOfType(inputKey)">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              <button *ngIf="!isLastRemainingOfGroup(inputKey)" class="btn input-group-addon btn-danger minus" (click)="removeInput(inputKey)">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </button>
+            </div>
+            <small class="truncate">
+              {{ itemsData[formGroup.controls[inputKey].value]?.title }}
+            </small>
           </div>
         </div>
       </div>

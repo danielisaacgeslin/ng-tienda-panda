@@ -35,3 +35,10 @@
     overflow: auto;
     margin-bottom: $tp-gap-regular;
 }
+
+.truncate {
+    height: 15px;
+    display: block;
+    overflow: hidden;
+    margin-bottom: $tp-gap-small;
+}

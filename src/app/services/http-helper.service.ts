@@ -62,6 +62,8 @@ export class HttpHelperService {
   }
 
   public getItems(itemIds: string[]): Observable<any> {
+    if (!itemIds.length) return Observable.empty();
+
     const options: RequestOptionsArgs = { params: { ids: itemIds.toString() } };
     const config = { method: 'get', url: env.api.mlItems, options };
     return this.wrapperMethod(config)
