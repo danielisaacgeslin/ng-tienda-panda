@@ -32,4 +32,9 @@ export class ProductListComponent implements OnInit {
   public orderBy(criteria: string): void {
     this.products = this.utilsService.order(criteria, this.products);
   }
+
+  public getIDFromSlide(slide: string): string {
+    const id: string = slide.slice(slide.lastIndexOf('/') + 1, slide.lastIndexOf('.'));
+    return id.includes('MLA') ? id : '';
+  }
 }

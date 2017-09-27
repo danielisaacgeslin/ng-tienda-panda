@@ -1,6 +1,6 @@
 <ngb-carousel>
   <ng-template *ngFor="let slide of slides" ngbSlide>
-    <img class="mx-auto d-block slide" [src]="slide" [alt]="slide">
+    <img [routerLink]="['/productos/detalle', getIDFromSlide(slide)]" class="mx-auto d-block slide" [src]="slide" [alt]="slide">
   </ng-template>
 </ngb-carousel>
 <div class="container min-layout-height">
