@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow: 
+
+Sitemap: http://tiendapanda.com/assets/sitemap.xml
