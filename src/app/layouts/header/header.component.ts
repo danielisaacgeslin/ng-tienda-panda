@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   public readonly routes: { link: string; name: string }[] = [
-    { link: '/productos', name: 'Hogas' },
+    { link: '/productos', name: 'Hogar' },
     { link: '/promociones', name: 'Bijou' },
     { link: '/segunda-mano', name: 'Varios' }
   ];
