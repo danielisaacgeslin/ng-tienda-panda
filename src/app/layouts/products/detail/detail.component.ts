@@ -1,12 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/do';
 
 import { MLService } from '../../../services';
 
 @Component({
-  selector: 'app-detail',
+  selector: 'tp-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })

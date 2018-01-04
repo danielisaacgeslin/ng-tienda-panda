@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MLService, UtilsService } from '../../../services';
 
 @Component({
-  selector: 'app-second-hand-list',
+  selector: 'tp-second-hand-list',
   templateUrl: './second-hand-list.component.html',
   styleUrls: ['./second-hand-list.component.scss']
 })

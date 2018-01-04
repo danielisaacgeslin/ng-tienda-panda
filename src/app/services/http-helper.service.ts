@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, ResponseOptions, RequestOptions } from '@angular/http';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/map';
 
 import { environment as env } from '../../environments/environment';
 
@@ -52,8 +54,8 @@ export class HttpHelperService {
     const config = { method: 'get', url: env.api.mlIds, options: {} };
     return this.wrapperMethod(config).map(res => {
       const json = res.json();
-      let finalJson: any = {};
-      for (let key in json) {
+      const finalJson: any = {};
+      for (const key in json) {
         if (key.charAt(0) === '_') continue;
         finalJson[key] = json[key];
       }
@@ -69,7 +71,7 @@ export class HttpHelperService {
     return this.wrapperMethod(config)
       .map(res => (<any>res.json()).sort((a, b) =>
         new Date(a.start_time).getTime() > new Date(b.start_time).getTime() ? 1 : -1
-      ))
+      ));
   }
 
   public getRunTimeConstants(): Observable<any> {

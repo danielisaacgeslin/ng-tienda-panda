@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable} from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class StoreService {
@@ -11,7 +12,7 @@ export class StoreService {
 
   public get(key: string): Observable<any> {
     if (!this.store[key]) this.store[key] = new Subject();
-    console.log(key, this.store[key])
+    console.log(key, this.store[key]);
     return this.store[key];
   }
 

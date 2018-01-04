@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
   selector: 'tp-json',
@@ -21,10 +21,10 @@ export class TpJSONComponent implements OnInit {
 
   public copy(): void {
     const text: string = this.content.nativeElement.innerHTML;
-    const elem = this.dom.createElement("textarea");
+    const elem = this.dom.createElement('textarea');
     elem.value = text;
     this.dom.body.appendChild(elem);
-    elem.select()
+    elem.select();
     this.dom.execCommand('copy');
     elem.remove();
   }

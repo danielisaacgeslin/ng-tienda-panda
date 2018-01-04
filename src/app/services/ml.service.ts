@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 import { StoreService } from './store.service';
 import { HttpHelperService } from './http-helper.service';

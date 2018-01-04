@@ -19,7 +19,7 @@ export class UtilsService {
       oldest: (a, b) => new Date(a.start_time).getTime() > new Date(b.start_time).getTime() ? 1 : -1,
       minToMaxPrice: (a, b) => a.price > b.price ? 1 : -1,
       MaxToMinPrice: (a, b) => a.price < b.price ? 1 : -1
-    }
+    };
     return items.sort(orderingFns[criteria]);
   }
 

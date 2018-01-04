@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'tp-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })

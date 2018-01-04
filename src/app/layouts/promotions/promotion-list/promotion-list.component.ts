@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MLService, UtilsService } from '../../../services';
 
 @Component({
-  selector: 'app-promotion-list',
+  selector: 'tp-promotion-list',
   templateUrl: './promotion-list.component.html',
   styleUrls: ['./promotion-list.component.scss']
 })

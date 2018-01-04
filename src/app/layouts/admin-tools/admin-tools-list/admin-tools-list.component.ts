@@ -8,13 +8,17 @@ import {
   ValidationErrors
 } from '@angular/forms';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/observable/empty';
 
 import { environment as env } from '../../../../environments/environment';
 import { MLService, ToastrService, HttpHelperService } from '../../../services';
 
 @Component({
-  selector: 'app-admin-tools-list',
+  selector: 'tp-admin-tools-list',
   templateUrl: './admin-tools-list.component.html',
   styleUrls: ['./admin-tools-list.component.scss']
 })
@@ -56,9 +60,9 @@ export class AdminToolsListComponent implements OnInit {
     if (!this.formGroup.valid) return;
 
     const MLIds: any = {};
-    for (let controlKey in this.formGroup.controls) {
+    for (const controlKey in this.formGroup.controls) {
       if (controlKey === 'token') continue;
-      let key: string = controlKey.slice(0, controlKey.indexOf('-'));
+      const key: string = controlKey.slice(0, controlKey.indexOf('-'));
       MLIds[key] = MLIds[key] || [];
       const value = this.generateId(this.formGroup.controls[controlKey].value);
       if (value) MLIds[key].push(value);
@@ -86,7 +90,7 @@ export class AdminToolsListComponent implements OnInit {
   public isLastOfType(keyToCheck: string): boolean {
     const keyToCheckData = this.getKeyData(keyToCheck);
     const keys: string[] = Object.keys(this.formGroup.controls);
-    let maxNumber: number = keys
+    const maxNumber: number = keys
       .filter(key => key.split('-')[0] === keyToCheckData.type)
       .map(key => Number(key.split('-')[1]))
       .reduce((prev, current) => prev > current ? prev : current, 0);
@@ -123,8 +127,8 @@ export class AdminToolsListComponent implements OnInit {
   }
 
   private resetForm(): void {
-    let controls: { [key: string]: AbstractControl } = {};
-    for (let key in this.MLIds) {
+    const controls: { [key: string]: AbstractControl } = {};
+    for (const key in this.MLIds) {
       this.MLIds[key].forEach((id: string, index: number) => {
         controls[`${key}-${index}`] = this.generateFormControl(id);
       });
@@ -151,7 +155,7 @@ export class AdminToolsListComponent implements OnInit {
         return Observable.empty();
       })
       .finally(() => this.savingMLIds = false)
-      .subscribe()
+      .subscribe();
   }
 
   private fillItemsData(ids: string[]): void {

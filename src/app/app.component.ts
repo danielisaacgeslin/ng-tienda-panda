@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
-import { ToastrService } from './services'
+import { ToastrService } from './services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'tp-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -15,10 +15,6 @@ export class AppComponent {
   constructor(carouselConfig: NgbCarouselConfig, private toastrService: ToastrService) {
     carouselConfig.interval = 3000;
     carouselConfig.wrap = true;
-  }
-
-  public ngOnInit() {
-
   }
 
 }
