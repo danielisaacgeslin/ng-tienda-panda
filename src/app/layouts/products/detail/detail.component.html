@@ -17,7 +17,7 @@
     <div class="col-6">
       <p class="article__condition">{{ article.condition === 'new' ? 'Nuevo' : '' }}</p>
       <h1 class="article__main-title">{{ article.title }}</h1>
-      <h4 class="article__price">{{ article.price | currency: 'USD': 'code': '1.0' }}</h4>
+      <h4 class="article__price">{{ article.price | currency: '$': 'code': '1.0' }}</h4>
       <a class="col-6 rounded btn tp-btn tp-btn_big" [href]="article.permalink" target="_blank">
         ver en Mercado Libre
       </a>
