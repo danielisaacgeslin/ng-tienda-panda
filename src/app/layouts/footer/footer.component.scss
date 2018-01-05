@@ -40,3 +40,13 @@
         font-variant: small-caps;
     }
 }
+
+.contact-data {
+    margin-bottom: 15px;
+
+    &__item {
+        color: $tp-gray;
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
