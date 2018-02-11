@@ -18,7 +18,14 @@
               }">
 
       <div class="col" *ngFor="let key of formKeys">
-        <p class="category-name">{{ key }}</p>
+        <p class="category-name">
+          {{ key }} 
+          <span [ngSwitch]="key">
+            <small *ngSwitchCase="'products'">(sports)</small>
+            <small *ngSwitchCase="'promotions'">(juegos)</small>
+            <small *ngSwitchCase="'secondHand'">(hogar)</small>
+          </span>
+        </p>
         <div class="category-input-container">
           <div *ngFor="let inputKey of getFieldNames(key)">
             <div class="input-group">

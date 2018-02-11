@@ -4,6 +4,7 @@ import { Http, RequestOptionsArgs, ResponseOptions, RequestOptions } from '@angu
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 import { environment as env } from '../../environments/environment';
 
