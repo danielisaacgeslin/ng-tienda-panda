@@ -5,10 +5,6 @@
 </ngb-carousel>
 <div class="container min-layout-height">
 
-
-  <tp-title>
-    <span class="small-caps">Productos/Colchon y Sommier Pocket</span>
-  </tp-title>
   <tp-order-by-select (orderCriteria)="orderBy($event)"></tp-order-by-select>
 
   <div *ngIf="!products.length" class="row align-items-center min-layout-height">
@@ -20,7 +16,5 @@
       <tp-article [props]="product"></tp-article>
     </li>
   </ul>
-
-  <tp-title>El envio de COLCHONES Y SOMMIERS ES SIN CARGO en Capital Federal y Gran Buenos Aires.</tp-title>
 
 </div>
