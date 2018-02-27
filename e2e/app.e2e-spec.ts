@@ -1,15 +1,14 @@
 import { AppPage } from './app.po';
 
 describe('ng-tienda-panda App', () => {
-  let page: AppPage;
+  let appPage: AppPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    appPage = new AppPage();
+    appPage.navigateTo();
   });
 
-  it('should contain alt on the main logo', next => {
-    page.navigateTo('/');
-    expect(page.getMainLogoAlt()).toEqual('tienda panda');
-    next();
+  it('should contain the main logo', () => {
+    expect(appPage.getMainLogo()).toBeTruthy();
   });
 });
