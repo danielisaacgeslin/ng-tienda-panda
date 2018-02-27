@@ -8,7 +8,7 @@
     "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "concurrently --kill-others -s \"yarn mock-server\" \"ng e2e --environment test\"",
     "mock-server": "ts-node ./e2e/mock-server.ts"
   },
   "private": true,
@@ -41,6 +41,7 @@
     "@types/restify": "^5.0.7",
     "@types/restify-cors-middleware": "^1.0.1",
     "codelyzer": "~3.1.1",
+    "concurrently": "^3.5.1",
     "cucumber": "^3.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",

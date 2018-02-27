@@ -1,3 +1,4 @@
+import { browser, by, element } from 'protractor';
 import { AppPage } from './app.po';
 
 describe('ng-tienda-panda App', () => {
