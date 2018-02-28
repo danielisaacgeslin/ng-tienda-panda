@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { environment } from '../environments/environment';
 
 import { RoutingModule } from './routing/routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -24,6 +26,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
   ],
   imports: [
     BrowserModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HttpModule,
     NgbModule.forRoot(),
     RoutingModule,
