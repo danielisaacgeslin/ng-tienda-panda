@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NotFoundComponent } from '../layouts/not-found/not-found.component';
+import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -12,19 +12,19 @@ const routes: Routes = [
   },
   {
     path: 'sports',
-    loadChildren: '../layouts/products/products.module#ProductsModule'
+    loadChildren: './layouts/sport/sport.module#SportModule'
   },
   {
     path: 'juegos',
-    loadChildren: '../layouts/promotions/promotions.module#PromotionsModule'
+    loadChildren: './layouts/promotions/promotions.module#PromotionsModule'
   },
   {
     path: 'hogar',
-    loadChildren: '../layouts/second-hand/second-hand.module#SecondHandModule'
+    loadChildren: './layouts/second-hand/second-hand.module#SecondHandModule'
   },
   {
     path: 'adminTools',
-    loadChildren: '../layouts/admin-tools/admin-tools.module#AdminToolsModule'
+    loadChildren: './layouts/admin-tools/admin-tools.module#AdminToolsModule'
   },
   {
     path: '**',

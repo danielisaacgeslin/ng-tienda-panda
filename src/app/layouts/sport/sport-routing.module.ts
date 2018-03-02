@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductListComponent } from './product-list/product-list.component';
+import { SportListComponent } from './sport-list/sport-list.component';
 import { DetailComponent } from './detail/detail.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', component: ProductListComponent },
-      { path: 'lista', component: ProductListComponent },
+      { path: '', component: SportListComponent },
+      { path: 'lista', component: SportListComponent },
       { path: 'detalle/:id', component: DetailComponent }
     ]
   }
@@ -24,4 +24,4 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: []
 })
-export class ProductsRoutingModule { }
+export class SportRoutingModule { }

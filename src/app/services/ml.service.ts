@@ -22,6 +22,10 @@ export class MLService {
       .map(items => items && items[0] || {});
   }
 
+  public getItems(ids: string[]): Observable<IArticle> {
+    return this.httpHelperService.getItems(ids);
+  }
+
   public getProducts(): Observable<IArticle[]> {
     return this.httpHelperService.getMLIds()
       .switchMap(data => this.httpHelperService.getItems(data.products));
