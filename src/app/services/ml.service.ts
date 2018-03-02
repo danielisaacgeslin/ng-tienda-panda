@@ -1,44 +1,46 @@
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
+import { map } from 'rxjs/operators';
+import { empty } from 'rxjs/observable/empty';
 
-import { StoreService } from './store.service';
+import { environment as env } from '../../environments/environment';
+import { Article } from '../models';
 import { HttpHelperService } from './http-helper.service';
-import { constants } from '../constants';
 
 @Injectable()
 export class MLService {
 
   constructor(private httpHelperService: HttpHelperService) { }
 
-  public getMLIds(): Observable<any> {
-    return this.httpHelperService.getMLIds();
+  public getMLIds(): Observable<{ [key: string]: string[] }> {
+    const config = { method: 'get', url: env.api.mlIds, options: {} };
+    return this.httpHelperService.fetch(config).pipe(
+      map(res => {
+        const finalJson: any = {};
+        for (const key in res) {
+          if (key.charAt(0) === '_') continue;
+          finalJson[key] = res[key];
+        }
+        return finalJson;
+      })
+    );
   }
 
-  public getItem(id: string): Observable<IArticle> {
-    return this.httpHelperService.getItems([id])
-      .map(items => items && items[0] || {});
+  public getItem(id: string): Observable<Article> {
+    return this.getItems([id]).pipe(
+      map(items => items && items[0] || {})
+    );
   }
 
-  public getItems(ids: string[]): Observable<IArticle> {
-    return this.httpHelperService.getItems(ids);
-  }
+  public getItems(ids: string[]): Observable<Article[]> {
+    if (!ids.length) return empty();
 
-  public getProducts(): Observable<IArticle[]> {
-    return this.httpHelperService.getMLIds()
-      .switchMap(data => this.httpHelperService.getItems(data.products));
+    const options = { params: { ids: ids.toString() } };
+    const config = { method: 'get', url: env.api.mlItems, options };
+    return this.httpHelperService.fetch(config).pipe(
+      map(res => (<any>res).sort((a, b) =>
+        new Date(a.start_time).getTime() > new Date(b.start_time).getTime() ? 1 : -1
+      ))
+    );
   }
-
-  public getPromotions(): Observable<IArticle[]> {
-    return this.httpHelperService.getMLIds()
-      .switchMap(data => this.httpHelperService.getItems(data.promotions));
-  }
-
-  public getSecondHand(): Observable<IArticle[]> {
-    return this.httpHelperService.getMLIds()
-      .switchMap(data => this.httpHelperService.getItems(data.secondHand));
-  }
-
 }

@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SecondHandListComponent } from './second-hand-list/second-hand-list.component';
+import { GameListComponent } from './game-list/game-list.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', component: SecondHandListComponent },
-      { path: 'lista', component: SecondHandListComponent }
+      { path: '', component: GameListComponent },
+      { path: 'lista', component: GameListComponent }
     ]
   }
 ];
@@ -22,4 +22,4 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: []
 })
-export class SecondHandRoutingModule { }
+export class GameRoutingModule { }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   stateName as productStateName,
@@ -10,23 +9,19 @@ import {
   Effects as productEffects
 } from '../../state-mgmt/product';
 
-import { BannerService } from '../../services';
 import { SharedModule } from '../../shared/shared.module';
-import { SportRoutingModule } from './sport-routing.module';
+import { HomeRoutingModule} from './home-routing.module';
 
-import { SportListComponent } from './sport-list/sport-list.component';
-import { DetailComponent } from './detail/detail.component';
+import { HomeListComponent } from './home-list/home-list.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    NgbModule,
     StoreModule.forFeature(productStateName, productReducer.reducer),
     EffectsModule.forFeature([productEffects]),
     SharedModule,
-    SportRoutingModule
+    HomeRoutingModule
   ],
-  providers: [BannerService],
-  declarations: [SportListComponent, DetailComponent]
+  declarations: [HomeListComponent]
 })
-export class SportModule { }
+export class HomeModule { }

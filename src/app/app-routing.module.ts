@@ -16,11 +16,11 @@ const routes: Routes = [
   },
   {
     path: 'juegos',
-    loadChildren: './layouts/promotions/promotions.module#PromotionsModule'
+    loadChildren: './layouts/game/game.module#GameModule'
   },
   {
     path: 'hogar',
-    loadChildren: './layouts/second-hand/second-hand.module#SecondHandModule'
+    loadChildren: './layouts/home/home.module#HomeModule'
   },
   {
     path: 'adminTools',

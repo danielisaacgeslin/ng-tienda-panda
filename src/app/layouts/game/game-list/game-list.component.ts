@@ -4,27 +4,26 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { takeUntil, filter, tap } from 'rxjs/operators';
 
-import { Article, Slide } from '../../../models';
-import { BannerService, UtilsService } from '../../../services';
+import { Article } from '../../../models';
+import { HttpHelperService, UtilsService } from '../../../services';
 import { actions as idMapActions, reducer as idMapStateReducer } from '../../../state-mgmt/id-map';
 import { actions as productActions, reducer as productStateReducer } from '../../../state-mgmt/product';
 
 @Component({
-  selector: 'tp-sport-list',
-  templateUrl: './sport-list.component.html',
-  styleUrls: ['./sport-list.component.scss']
+  selector: 'tp-game-list',
+  templateUrl: './game-list.component.html',
+  styleUrls: ['./game-list.component.scss']
 })
-export class SportListComponent implements OnInit, OnDestroy {
+export class GameListComponent implements OnInit, OnDestroy {
 
-  public slides: string[] = [];
   public products: Article[] = [];
-  private readonly categoryName: string = 'products';
+  private readonly categoryName: string = 'promotions';
   private destroy$: Subject<void> = new Subject();
   private ids$: Observable<string[]> = this.store.select(idMapStateReducer.getByCategory(this.categoryName));
   private products$: Observable<Article[]> = this.store.select(productStateReducer.getByCategory(this.categoryName));
 
   constructor(
-    private bannerService: BannerService,
+    private httpHelperService: HttpHelperService,
     private utilsService: UtilsService,
     private store: Store<idMapStateReducer.State & productStateReducer.State>
   ) { }
@@ -42,10 +41,6 @@ export class SportListComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$),
       tap(products => this.products = products)
     ).subscribe();
-
-    this.bannerService.getBanners().pipe(
-      tap(data => this.slides = data)
-    ).subscribe();
   }
 
   public ngOnDestroy(): void {
@@ -54,11 +49,5 @@ export class SportListComponent implements OnInit, OnDestroy {
 
   public orderBy(criteria: string): void {
     this.products = this.utilsService.order(criteria, this.products);
-  }
-
-  public getIDFromSlide(slide: string): string {
-    if (!slide) return '';
-    const id: string = slide.slice(slide.lastIndexOf('/') + 1, slide.lastIndexOf('.'));
-    return id.includes('MLA') ? id : '';
   }
 }

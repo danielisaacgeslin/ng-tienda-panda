@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Article } from '../models';
+
 @Injectable()
 export class UtilsService {
 
@@ -12,7 +14,7 @@ export class UtilsService {
 
   constructor() { }
 
-  public order(criteria: string, items: IArticle[] = []): IArticle[] {
+  public order(criteria: string, items: Article[] = []): Article[] {
     criteria = criteria || this.orderByCriterias[0].value;
     const orderingFns = {
       latest: (a, b) => new Date(a.start_time).getTime() < new Date(b.start_time).getTime() ? 1 : -1,

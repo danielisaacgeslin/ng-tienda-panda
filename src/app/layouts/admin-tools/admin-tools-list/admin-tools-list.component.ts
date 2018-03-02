@@ -15,7 +15,8 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/empty';
 
 import { environment as env } from '../../../../environments/environment';
-import { MLService, ToastrService, HttpHelperService } from '../../../services';
+import { Article } from '../../../models';
+import { MLService, ToastrService } from '../../../services';
 
 @Component({
   selector: 'tp-admin-tools-list',
@@ -29,7 +30,7 @@ export class AdminToolsListComponent implements OnInit {
   public formGroup: FormGroup = new FormGroup({ token: new FormControl('', [Validators.required]) });
   public hiddenCategory: { [key: string]: boolean } = {};
   public savingMLIds: boolean = false;
-  public itemsData: { [key: string]: IArticle } = {};
+  public itemsData: { [key: string]: Article } = {};
 
   private readonly idLength: number = 12;
   private readonly idPrefix: string = 'MLA';
@@ -38,8 +39,7 @@ export class AdminToolsListComponent implements OnInit {
   constructor(
     private MLService: MLService,
     private http: Http,
-    private toastrService: ToastrService,
-    private httpHelperService: HttpHelperService
+    private toastrService: ToastrService
   ) { }
 
   public ngOnInit() {
@@ -159,9 +159,9 @@ export class AdminToolsListComponent implements OnInit {
   }
 
   private fillItemsData(ids: string[]): void {
-    this.httpHelperService.getItems(ids)
+    this.MLService.getItems(ids)
       .do(data => {
-        const newItemsData: { [key: string]: IArticle } = {};
+        const newItemsData: { [key: string]: Article } = {};
         data.forEach(item => newItemsData[item.id] = item);
         this.itemsData = Object.assign({}, this.itemsData, newItemsData);
       })

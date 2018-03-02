@@ -2,7 +2,6 @@ import { createFeatureSelector, createSelector, State } from '@ngrx/store';
 
 import { stateName } from './state-name';
 import { actionTypes } from './actions';
-import { State as RootState } from '../root-reducer';
 
 export interface IdMap {
   [categoryKey: string]: string[];
@@ -20,7 +19,7 @@ export function reducer(state: IdMap = initialState, action: any): IdMap {
 }
 
 
-export interface State extends RootState {
+export interface State {
   idMap: IdMap;
 }
 

@@ -1,5 +1,11 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-export interface State { }
+import { reducer as idMapReducer } from './id-map';
 
-export const reducers: ActionReducerMap<State> = { };
+export interface State extends idMapReducer.State { }
+
+export const initialState = { ...idMapReducer.initialState };
+
+export const reducers: ActionReducerMap<State> = {
+  idMap: idMapReducer.reducer
+};
