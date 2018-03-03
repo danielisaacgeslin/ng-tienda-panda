@@ -6,7 +6,6 @@ import { take, filter, switchMap, tap, map } from 'rxjs/operators';
 
 import { Article } from '../../../models';
 import { actions as productActions, reducer as productStateReducer } from '../../../state-mgmt/product';
-import { MLService } from '../../../services';
 
 @Component({
   selector: 'tp-detail',

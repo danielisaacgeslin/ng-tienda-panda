@@ -1,55 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  AbstractControl,
-  Validators,
-  ValidatorFn,
-  ValidationErrors
-} from '@angular/forms';
-import { Http, Headers, RequestOptionsArgs } from '@angular/http';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormControl, FormGroup, AbstractControl, Validators, ValidatorFn } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/finally';
-import 'rxjs/add/observable/empty';
+import { Subject } from 'rxjs/Subject';
+import { tap, filter, take, takeUntil, map } from 'rxjs/operators';
 
 import { environment as env } from '../../../../environments/environment';
 import { Article } from '../../../models';
-import { MLService, ToastrService } from '../../../services';
+import { actions as idMapActions, reducer as idMapReducer } from '../../../state-mgmt/id-map';
+import { actions as adminActions, reducer as adminReducer } from '../../../state-mgmt/admin';
+import { actions as productActions, reducer as productReducer } from '../../../state-mgmt/product';
 
 @Component({
   selector: 'tp-admin-tools-list',
   templateUrl: './admin-tools-list.component.html',
   styleUrls: ['./admin-tools-list.component.scss']
 })
-export class AdminToolsListComponent implements OnInit {
+export class AdminToolsListComponent implements OnInit, OnDestroy {
 
-  public MLIds: any = {};
+  public MLIds: idMapReducer.IdMap = {};
   public formKeys: string[] = [];
   public formGroup: FormGroup = new FormGroup({ token: new FormControl('', [Validators.required]) });
   public hiddenCategory: { [key: string]: boolean } = {};
   public savingMLIds: boolean = false;
   public itemsData: { [key: string]: Article } = {};
-
+  private readonly categoryName: string = 'adminList';
   private readonly idLength: number = 12;
   private readonly idPrefix: string = 'MLA';
   private token: string;
+  private destroy$: Subject<void> = new Subject();
 
-  constructor(
-    private MLService: MLService,
-    private http: Http,
-    private toastrService: ToastrService
-  ) { }
+  constructor(private store: Store<idMapReducer.State>) { }
 
   public ngOnInit() {
-    this.MLService.getMLIds()
-      .subscribe(ids => {
+    this.store.dispatch(new idMapActions.Fetch());
+    this.store.select(adminReducer.getToken).pipe(
+      take(1),
+      tap(token => this.formGroup.controls.token.setValue(token))
+    ).subscribe();
+    this.formGroup.controls.token.valueChanges.pipe(
+      takeUntil(this.destroy$),
+      tap(value => this.store.dispatch(new adminActions.AddToken(value)))
+    ).subscribe();
+    this.store.select(idMapReducer.getIdMapState).pipe(
+      filter(data => !!Object.keys(data).length),
+      tap(ids => {
         this.MLIds = ids;
         this.formKeys = Object.keys(ids);
         this.fillItemsData(this.getCondensedMLIds());
         this.resetForm();
-      });
+      })
+    ).subscribe();
+    this.store.select(adminReducer.getLoading).pipe(
+      takeUntil(this.destroy$),
+      tap(loading => {
+        this.savingMLIds = loading.active;
+      })
+    ).subscribe();
+    this.store.select(productReducer.getByCategory(this.categoryName)).pipe(
+      takeUntil(this.destroy$),
+      map(data => {
+        const articleMap = {};
+        data.forEach(item => articleMap[item.id] = item);
+        return articleMap;
+      }),
+      tap(data => this.itemsData = data)
+    ).subscribe();
+  }
+
+  public ngOnDestroy() {
+    this.destroy$.next();
   }
 
   public getFieldNames(key: string): string[] {
@@ -71,7 +91,7 @@ export class AdminToolsListComponent implements OnInit {
     this.token = this.formGroup.controls.token.value;
     this.fillItemsData(this.getCondensedMLIds());
     this.resetForm();
-    this.saveMLIds();
+    this.store.dispatch(new adminActions.SaveMLIds({ token: this.token, MLIds: this.MLIds }));
   }
 
   public toggleHiddenCategory(key: string): void {
@@ -133,7 +153,7 @@ export class AdminToolsListComponent implements OnInit {
         controls[`${key}-${index}`] = this.generateFormControl(id);
       });
     }
-    controls.token = new FormControl(this.token, [Validators.required]);
+    controls.token = this.formGroup.controls.token;
     this.formGroup = new FormGroup(controls);
   }
 
@@ -145,27 +165,8 @@ export class AdminToolsListComponent implements OnInit {
     return new FormControl(value, [Validators.required, this.validate()]);
   }
 
-  private saveMLIds() {
-    this.savingMLIds = true;
-    const headers = new Headers({ token: this.token });
-    this.http.post(env.api.mlIds, this.MLIds, { headers })
-      .do(data => this.toastrService.toast({ title: 'Exito', message: 'lista salvada', status: 'success' }))
-      .catch(error => {
-        this.toastrService.toast({ title: 'Error', message: error.json(), status: 'danger' });
-        return Observable.empty();
-      })
-      .finally(() => this.savingMLIds = false)
-      .subscribe();
-  }
-
   private fillItemsData(ids: string[]): void {
-    this.MLService.getItems(ids)
-      .do(data => {
-        const newItemsData: { [key: string]: Article } = {};
-        data.forEach(item => newItemsData[item.id] = item);
-        this.itemsData = Object.assign({}, this.itemsData, newItemsData);
-      })
-      .subscribe();
+    this.store.dispatch(new productActions.FetchCategory({ name: this.categoryName, ids }));
   }
 
   private getCondensedMLIds(): string[] {

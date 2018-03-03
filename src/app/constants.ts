@@ -1,7 +1,6 @@
 export const constants = {
-    storeKeys: {
-        mlIds: 'mlIds',
-        products: 'products',
-        promotions: 'promotions'
+    STORAGE: {
+        PREFIX: '__tienda-panda-storage:',
+        get TOKEN() { return `${constants.STORAGE.PREFIX}__token`; }
     }
 };

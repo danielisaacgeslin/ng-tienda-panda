@@ -7,7 +7,7 @@ export class Article {
   public pictures?: { url: string; title: string }[] = [];
   public condition?: string = null;
 
-  constructor(args?: any) {
+  constructor(args?: Article) {
     Object.assign(this, args);
   }
 }

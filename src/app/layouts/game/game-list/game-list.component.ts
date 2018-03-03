@@ -6,7 +6,7 @@ import { takeUntil, filter, tap } from 'rxjs/operators';
 
 import { Article } from '../../../models';
 import { HttpHelperService, UtilsService } from '../../../services';
-import { actions as idMapActions, reducer as idMapStateReducer } from '../../../state-mgmt/id-map';
+import { actions as idMapActions, reducer as idMapReducer } from '../../../state-mgmt/id-map';
 import { actions as productActions, reducer as productStateReducer } from '../../../state-mgmt/product';
 
 @Component({
@@ -19,13 +19,13 @@ export class GameListComponent implements OnInit, OnDestroy {
   public products: Article[] = [];
   private readonly categoryName: string = 'promotions';
   private destroy$: Subject<void> = new Subject();
-  private ids$: Observable<string[]> = this.store.select(idMapStateReducer.getByCategory(this.categoryName));
+  private ids$: Observable<string[]> = this.store.select(idMapReducer.getByCategory(this.categoryName));
   private products$: Observable<Article[]> = this.store.select(productStateReducer.getByCategory(this.categoryName));
 
   constructor(
     private httpHelperService: HttpHelperService,
     private utilsService: UtilsService,
-    private store: Store<idMapStateReducer.State & productStateReducer.State>
+    private store: Store<idMapReducer.State & productStateReducer.State>
   ) { }
 
   public ngOnInit(): void {

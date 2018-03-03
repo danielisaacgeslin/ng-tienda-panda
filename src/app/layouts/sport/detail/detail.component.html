@@ -6,7 +6,7 @@
   
   <div *ngIf="article" class="row align-items-center article">
     
-    <div class="col-6">
+    <div class="col-6" *ngIf="article.pictures.length">
       <ngb-carousel>
         <ng-template *ngFor="let slide of article.pictures" ngbSlide>
           <img class="mx-auto d-block slide" [src]="slide.url" [alt]="article.title">
