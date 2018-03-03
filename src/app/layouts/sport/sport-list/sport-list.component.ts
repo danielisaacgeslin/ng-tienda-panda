@@ -5,9 +5,10 @@ import { Subject } from 'rxjs/Subject';
 import { takeUntil, filter, tap } from 'rxjs/operators';
 
 import { Article, Slide } from '../../../models';
-import { BannerService, UtilsService } from '../../../services';
+import { UtilsService } from '../../../services';
 import { actions as idMapActions, reducer as idMapReducer } from '../../../state-mgmt/id-map';
 import { actions as productActions, reducer as productReducer } from '../../../state-mgmt/product';
+import { actions as slideActions, reducer as slideReducer } from '../../../state-mgmt/slide';
 
 @Component({
   selector: 'tp-sport-list',
@@ -16,23 +17,22 @@ import { actions as productActions, reducer as productReducer } from '../../../s
 })
 export class SportListComponent implements OnInit, OnDestroy {
 
-  public slides: string[] = [];
+  public slides: Slide[] = [];
   public products: Article[] = [];
   private readonly categoryName: string = 'products';
   private destroy$: Subject<void> = new Subject();
-  private ids$: Observable<string[]> = this.store.select(idMapReducer.getByCategory(this.categoryName));
   private products$: Observable<Article[]> = this.store.select(productReducer.getByCategory(this.categoryName));
+  private slides$: Observable<Slide[]> = this.store.select(slideReducer.getList);
 
   constructor(
-    private bannerService: BannerService,
     private utilsService: UtilsService,
     private store: Store<idMapReducer.State & productReducer.State>
   ) { }
 
   public ngOnInit(): void {
     this.store.dispatch(new idMapActions.Fetch());
-
-    this.ids$.pipe(
+    this.store.dispatch(new slideActions.Fetch());
+    this.store.select(idMapReducer.getByCategory(this.categoryName)).pipe(
       takeUntil(this.destroy$),
       filter(ids => !!ids.length),
       tap(ids => this.store.dispatch(new productActions.FetchCategory({ name: this.categoryName, ids })))
@@ -40,11 +40,13 @@ export class SportListComponent implements OnInit, OnDestroy {
 
     this.products$.pipe(
       takeUntil(this.destroy$),
-      tap(products => this.products = products)
+      tap(products => this.products = products),
+      tap(() => this.orderBy(null))
     ).subscribe();
 
-    this.bannerService.getBanners().pipe(
-      tap(data => this.slides = data)
+    this.slides$.pipe(
+      takeUntil(this.destroy$),
+      tap(list => this.slides = list)
     ).subscribe();
   }
 
@@ -56,9 +58,9 @@ export class SportListComponent implements OnInit, OnDestroy {
     this.products = this.utilsService.order(criteria, this.products);
   }
 
-  public getIDFromSlide(slide: string): string {
+  public getIDFromSlide(slide: Slide): string {
     if (!slide) return '';
-    const id: string = slide.slice(slide.lastIndexOf('/') + 1, slide.lastIndexOf('.'));
+    const id: string = slide.src.slice(slide.src.lastIndexOf('/') + 1, slide.src.lastIndexOf('.'));
     return id.includes('MLA') ? id : '';
   }
 }

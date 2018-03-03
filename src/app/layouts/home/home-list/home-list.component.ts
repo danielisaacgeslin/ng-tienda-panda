@@ -19,7 +19,6 @@ export class HomeListComponent implements OnInit, OnDestroy {
   public products: Article[] = [];
   private readonly categoryName: string = 'secondHand';
   private destroy$: Subject<void> = new Subject();
-  private ids$: Observable<string[]> = this.store.select(idMapReducer.getByCategory(this.categoryName));
   private products$: Observable<Article[]> = this.store.select(productReducer.getByCategory(this.categoryName));
 
   constructor(
@@ -30,7 +29,7 @@ export class HomeListComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.dispatch(new idMapActions.Fetch());
 
-    this.ids$.pipe(
+    this.store.select(idMapReducer.getByCategory(this.categoryName)).pipe(
       takeUntil(this.destroy$),
       filter(ids => !!ids.length),
       tap(ids => this.store.dispatch(new productActions.FetchCategory({ name: this.categoryName, ids })))
@@ -38,7 +37,8 @@ export class HomeListComponent implements OnInit, OnDestroy {
 
     this.products$.pipe(
       takeUntil(this.destroy$),
-      tap(products => this.products = products)
+      tap(products => this.products = products),
+      tap(() => this.orderBy(null))
     ).subscribe();
   }
 

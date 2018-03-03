@@ -9,6 +9,11 @@ import {
   reducer as productReducer,
   Effects as productEffects
 } from '../../state-mgmt/product';
+import {
+  stateName as slideStateName,
+  reducer as slideReducer,
+  Effects as slideEffects
+} from '../../state-mgmt/slide';
 
 import { BannerService } from '../../services';
 import { SharedModule } from '../../shared/shared.module';
@@ -22,7 +27,8 @@ import { DetailComponent } from './detail/detail.component';
     CommonModule,
     NgbModule,
     StoreModule.forFeature(productStateName, productReducer.reducer),
-    EffectsModule.forFeature([productEffects]),
+    StoreModule.forFeature(slideStateName, slideReducer.reducer),
+    EffectsModule.forFeature([productEffects, slideEffects]),
     SharedModule,
     SportRoutingModule
   ],
