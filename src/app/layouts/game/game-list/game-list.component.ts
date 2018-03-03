@@ -7,7 +7,7 @@ import { takeUntil, filter, tap } from 'rxjs/operators';
 import { Article } from '../../../models';
 import { HttpHelperService, UtilsService } from '../../../services';
 import { actions as idMapActions, reducer as idMapReducer } from '../../../state-mgmt/id-map';
-import { actions as productActions, reducer as productStateReducer } from '../../../state-mgmt/product';
+import { actions as productActions, reducer as productReducer } from '../../../state-mgmt/product';
 
 @Component({
   selector: 'tp-game-list',
@@ -20,12 +20,12 @@ export class GameListComponent implements OnInit, OnDestroy {
   private readonly categoryName: string = 'promotions';
   private destroy$: Subject<void> = new Subject();
   private ids$: Observable<string[]> = this.store.select(idMapReducer.getByCategory(this.categoryName));
-  private products$: Observable<Article[]> = this.store.select(productStateReducer.getByCategory(this.categoryName));
+  private products$: Observable<Article[]> = this.store.select(productReducer.getByCategory(this.categoryName));
 
   constructor(
     private httpHelperService: HttpHelperService,
     private utilsService: UtilsService,
-    private store: Store<idMapReducer.State & productStateReducer.State>
+    private store: Store<idMapReducer.State & productReducer.State>
   ) { }
 
   public ngOnInit(): void {

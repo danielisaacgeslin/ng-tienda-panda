@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { take, filter, switchMap, tap, map } from 'rxjs/operators';
 
 import { Article } from '../../../models';
-import { actions as productActions, reducer as productStateReducer } from '../../../state-mgmt/product';
+import { actions as productActions, reducer as productReducer } from '../../../state-mgmt/product';
 
 @Component({
   selector: 'tp-detail',
@@ -20,7 +20,7 @@ export class DetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<productStateReducer.State>,
+    private store: Store<productReducer.State>,
     @Inject(DOCUMENT) private document: Document
   ) { }
 
@@ -29,7 +29,7 @@ export class DetailComponent implements OnInit {
       take(1),
       map(params => params.id),
       tap(id => this.store.dispatch(new productActions.FetchById({ name: this.categoryName, id }))),
-      switchMap(id => this.store.select(productStateReducer.getById(id))),
+      switchMap(id => this.store.select(productReducer.getById(id))),
       filter(Boolean),
       take(1),
       tap(artcle => this.article = artcle),

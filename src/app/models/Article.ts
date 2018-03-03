@@ -5,6 +5,7 @@ export class Article {
   public price?: number = null;
   public attributes?: { name: string; value_name: string }[] = [];
   public pictures?: { url: string; title: string }[] = [];
+  public thumbnail?: string = null;
   public condition?: string = null;
 
   constructor(args?: Article) {
