@@ -17,6 +17,10 @@ ul, ol {
     list-style: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 tp-loading {
     width: 100%;
 }
