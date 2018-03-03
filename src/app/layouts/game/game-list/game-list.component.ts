@@ -5,7 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { takeUntil, filter, tap } from 'rxjs/operators';
 
 import { Article } from '../../../models';
-import { HttpHelperService, UtilsService } from '../../../services';
+import { UtilsService } from '../../../services';
 import { actions as idMapActions, reducer as idMapReducer } from '../../../state-mgmt/id-map';
 import { actions as productActions, reducer as productReducer } from '../../../state-mgmt/product';
 
@@ -23,7 +23,6 @@ export class GameListComponent implements OnInit, OnDestroy {
   private products$: Observable<Article[]> = this.store.select(productReducer.getByCategory(this.categoryName));
 
   constructor(
-    private httpHelperService: HttpHelperService,
     private utilsService: UtilsService,
     private store: Store<idMapReducer.State & productReducer.State>
   ) { }
