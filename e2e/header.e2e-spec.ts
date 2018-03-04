@@ -5,9 +5,11 @@ import { HeaderPage } from './header.po';
 describe('ng-tienda-panda Header', () => {
   let headerPage: HeaderPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    browser.waitForAngularEnabled(false);
     headerPage = new HeaderPage();
     headerPage.navigateTo();
+    await browser.sleep(3500);
   });
 
   it('should contain the main logo', async () => {
