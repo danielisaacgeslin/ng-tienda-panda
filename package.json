@@ -9,7 +9,7 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "concurrently --kill-others -s \"yarn mock-server\" \"ng e2e --environment test\"",
+    "e2e": "ng e2e --environment dev",
     "mock-server": "ts-node ./e2e/mock-server.ts"
   },
   "dependencies": {
