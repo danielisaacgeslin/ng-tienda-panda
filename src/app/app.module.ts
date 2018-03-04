@@ -32,7 +32,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
   imports: [
     BrowserModule,
     StoreModule.forRoot(reducers, initialState),
-    StoreDevtoolsModule.instrument({ maxAge: 50, logOnly: environment.production }),
+    environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 50 }),
     EffectsModule.forRoot([idMapEffects]),
     RoutingModule,
     // ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }), // needs https
