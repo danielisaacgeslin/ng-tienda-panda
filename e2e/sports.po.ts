@@ -22,6 +22,6 @@ export class SportsPage {
   }
 
   public getViewMoreBtn() {
-    return element(by.css('tp-article button.tp-btn'));
+    return element(by.css('li:first-child tp-article button.tp-btn'));
   }
 }
